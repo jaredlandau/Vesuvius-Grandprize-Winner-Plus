@@ -1,9 +1,9 @@
 #!/bin/sh
 
 echo username?
-read registeredusers
+read USERNAME
 echo password?
-read only
+read PASSWORD
 
 rclone copy :http:/full-scrolls/Scroll1.volpkg/paths/20231022170901/20231022170901_mask.png ./train_scrolls/20231022170901/ --http-url http://$USERNAME:$PASSWORD@dl.ash2txt.org/ --progress --multi-thread-streams=8 --transfers=8
 rclone copy :http:/full-scrolls/Scroll1.volpkg/paths/20231022170901/layers/ ./train_scrolls/20231022170901/layers/ --http-url http://$USERNAME:$PASSWORD@dl.ash2txt.org/ --progress --multi-thread-streams=8 --transfers=8
