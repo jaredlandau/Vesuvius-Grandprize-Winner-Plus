@@ -317,6 +317,7 @@ if __name__ == "__main__":
     now = datetime.now()
     current_time = now.strftime("%Y%m%d%H%M%S")
 
+    print("Initialising...")
     model=RegressionPLModel.load_from_checkpoint(args.model_path,strict=False)
     model.cuda()
     model.eval()
@@ -324,6 +325,7 @@ if __name__ == "__main__":
         project="Vesuvius", 
         name=f"ALL_scrolls_tta", 
     )
+
     for fragment_id in args.segment_id:
         if os.path.exists(f"{args.segment_path}/{fragment_id}/layers/32.{args.format}"):
             preds=[]
@@ -352,13 +354,14 @@ if __name__ == "__main__":
                     os.makedirs(f"{args.out_path}/{fragment_id}",exist_ok=True)
                 except:
                     pass
+                print("Saving predictions...")
                 cv2.imwrite(os.path.join(f"{args.out_path}/{fragment_id}",
                                          f"{fragment_id}_prediction_n{args.num_layers}s{start_f}e{end_f-1}_{current_time}.png"),
                                          image_cv)
+                print("Done.")
                 #output_path = f"{args.out_path}/{fragment_id}"
                 #output_path = os.path.realpath(output_path)
                 #os.startfile(output_path)
-    
     del mask_pred,test_loader,model
     torch.cuda.empty_cache()
     gc.collect()
