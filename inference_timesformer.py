@@ -313,7 +313,7 @@ def scheduler_step(scheduler, avg_val_loss, epoch):
 
 def predict_fn(test_loader, model, device, test_xyxys, pred_shape):
     mask_prediction = np.zeros(pred_shape)
-    mask_count = np.ones(pred_shape)
+    mask_count = np.zeros(pred_shape)
     kernel = gkern(CFG.size,1)
     kernel = kernel / kernel.max()
     model.eval()
@@ -328,6 +328,9 @@ def predict_fn(test_loader, model, device, test_xyxys, pred_shape):
         for i, (x1, y1, x2, y2) in enumerate(xys):
             mask_prediction[y1:y2, x1:x2] += np.multiply(F.interpolate(y_preds[i].unsqueeze(0).float(),scale_factor=16,mode='bilinear').squeeze(0).squeeze(0).numpy(),kernel)
             mask_count[y1:y2, x1:x2] += np.ones((CFG.size, CFG.size))
+
+    # adding a small epsilon value prevents divide by zero errors
+    mask_count[mask_count == 0] = np.finfo(float).eps
 
     mask_prediction /= mask_count
     return mask_prediction
@@ -344,7 +347,7 @@ if __name__ == "__main__":
     if torch.cuda.is_available():
         device = torch.device('cuda')
         print(f"Device type: {device}")
-        print(f"Number of CUDA devices: {torch.cuda.device_count()}")
+        print(f"Device count: {torch.cuda.device_count()}")
         #torch.print_cuda_info()
     else:
         device = torch.device('cpu')
@@ -399,6 +402,7 @@ if __name__ == "__main__":
                     image_cv
                 )
                 print("Done.")
+                print()
                 #output_path = f"{args.out_path}/{fragment_id}"
                 #output_path = os.path.realpath(output_path)
                 #os.startfile
