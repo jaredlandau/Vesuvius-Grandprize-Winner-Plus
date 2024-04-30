@@ -1,3 +1,5 @@
+.idea/
+.venv/
 outputs/
 Vesuvius-Grandprize-Winner/
 wandb/
