@@ -1,18 +1,9 @@
 # Vesuvius GP+
 
-This repository is an extended implementation of the [Vesuvius Challenge 2023 Grand Prize winner](https://github.com/younader/Vesuvius-Grandprize-Winner). The primary goal of this repository is to greatly simplify the new user experience for those looking to get started with ink detection. This project also features some extra functionality compared to the original ink detection script, giving users fine control over exactly which layers they perform inference on.
+This repository is an extended implementation of the [Vesuvius Challenge 2023 Grand Prize winner](https://github.com/younader/Vesuvius-Grandprize-Winner). The primary goal of this repository is to greatly simplify the new user experience for those looking to get started with ink detection. This project also features some extra functionality compared to the original ink detection script, giving users fine control over exactly which layers they perform inference on. Read [this post]() for a brief introduction to some of the experimentation I've done using this script.
 
-Read [this post]() for a brief introduction to some of the experimentation I've done using this script.
-
-## Changelog
-* Added an option allowing users to select the number of layers to perform inference on
-* Added an option allowing users to select the starting layer for an inference run
-* Added detailed filenames to generated predictions, including layer and timestamp data
-* Added detailed console outputs, so that users can easily track the progress of inference runs
-* Fixed a persistent divide-by-zero error in inference_timesformer.py
-* Refactored inference_timesformer.py
-* Merged eval_scrolls and train_scrolls directories, to prevent data duplication
-* Cleaned up home directory to simplify new user experience
+## Contact
+Feel free to contact me on Discord if you have any questions at all (@tetradrachm).
 
 ## Installation
 
@@ -117,6 +108,17 @@ Where `--start` determines the starting layer for an inference run, and `--num_l
 ### WandB
 
 If this is your first time running the script, you may be prompted to set up a [WandB](https://wandb.ai/site) account. Setting up an account is quick and easy, and allows you to view your results and statistics on their online dashboard, so I'd highly recommend doing so.
+
+
+## Changelog
+* Added the option to select the number of layers to perform inference on
+* Added the option to select the starting layer for an inference run
+* Added detailed filenames to generated predictions, including layer and timestamp data
+* Added detailed console outputs, so that users can easily track the progress of inference runs
+* Fixed a persistent divide-by-zero error in inference_timesformer.py
+* Refactored inference_timesformer.py
+* Merged eval_scrolls and train_scrolls directories, to prevent data duplication
+* Cleaned up home directory to simplify user experience
 
 
 ## License
