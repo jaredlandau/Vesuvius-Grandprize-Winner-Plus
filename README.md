@@ -51,7 +51,9 @@ Running the `free` or `top` command again should now show your newly allocated m
 
 Before we run the script, we're going to need at least one segment downloaded to run inference on. You can find instructions on how to access the data [here](https://scrollprize.org/data).
 
-Your basic file structure should look something like this:
+You can download as many (or as few) layers as you'd like. Until you've had the chance to experiment a bit, I'd recommend starting with layers that are relatively small, between 50 MB and 250 MB each. Otherwise, each inference run could take a while to finish.
+
+Your initial file structure should look something like this:
 
 ```
 Vesuvius-Grandprize-Winner-Plus/
@@ -69,7 +71,7 @@ Vesuvius-Grandprize-Winner-Plus/
 
 You should create a new folder in the 'scrolls' directory for each new segment you download. Each segment should have its own 'layers' folder and mask image. Inside the 'layers' folder, drop in as many layers as you need from any part of the segment.
 
-You do not need to create any folders in the 'predictions' directory, the script will output inferences there automatically. Prediction filenames contain lots of useful information, see below:
+You don't need to create any folders in the 'predictions' directory, the script will output inferences there automatically. Prediction filenames contain lots of useful information, see below:
 
 ```
 20230902141231_prediction_n5_s29e33_20240601001122.png
@@ -85,7 +87,7 @@ The timestamp is mostly there so that you can differentiate each inference you g
 
 ### Running the script
 
-Navigate to the mounted directory containing your installation of this repository. For example:
+Navigate to the mounted directory containing your installation of this repository.
 
 ```
 cd /mnt/c/Users/name/folder/Vesuvius-Grandprize-Winner-Plus/
