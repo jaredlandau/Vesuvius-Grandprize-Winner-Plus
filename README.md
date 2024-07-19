@@ -1,6 +1,6 @@
 # Vesuvius GP+
 
-This repository is an extended implementation of the [Vesuvius Challenge 2023 Grand Prize winner](https://github.com/younader/Vesuvius-Grandprize-Winner). The primary goal of this repository is to greatly simplify the new user experience for those looking to get started with ink detection. This project also features some extra functionality compared to the original ink detection script, giving users fine control over exactly which layers they perform inference on. Read [this post]() for a brief introduction to some of the experimentation I've done using this script.
+This repository is an extended implementation of the [Vesuvius Challenge 2023 Grand Prize winner](https://github.com/younader/Vesuvius-Grandprize-Winner). The primary goal of this repository is to greatly simplify the new user experience for those looking to get started with ink detection. This project also features some extra functionality compared to the original ink detection script, giving users fine control over exactly which layers they perform inference on. Read [this post](https://medium.com/@jaredlandau/vesuvius-challenge-ink-detection-part-1-introduction-1cb125a56b21) for a brief introduction to some of the experimentation I've done using this script.
 
 <br/>
 
