@@ -1,5 +1,7 @@
 # Vesuvius GP+
 
+This project was awarded the Vesuvius Challenge [Open Source Prize](https://scrollprize.substack.com/p/it-has-never-been-easier-to-look) in July 2024.
+
 This repository is an extended implementation of the [Vesuvius Challenge 2023 Grand Prize winner](https://github.com/younader/Vesuvius-Grandprize-Winner). The primary goal of this repository is to greatly simplify the new user experience for those looking to get started with ink detection. This project also features some extra functionality compared to the original ink detection script, giving users fine control over exactly which layers they perform inference on. Read [this post](https://medium.com/@jaredlandau/vesuvius-challenge-ink-detection-part-1-introduction-1cb125a56b21) for a brief introduction to some of the experimentation I've done using this script.
 
 <br/>
@@ -137,8 +139,8 @@ Feel free to contact me on Discord if you have any questions at all (@tetradrach
 This repository is open-source code, licensed under the MIT License. See [LICENSE.txt](https://github.com/jaredlandau/Vesuvius-Grandprize-Winner-Plus/blob/main/LICENSE.txt) for details.
 
 
-## Acknowledgments
+## Acknowledgements
 
 Huge thanks to Youssef Nader, Luke Farritor, and Julian Schillinger for their fantastic Grand Prize submission, which this repository is directly built on.
 
-And of course, a massive thanks to the organisers of the Vesuvius Challenge for their fantastic competition and invaluable dataset. I'd highly encourage people to join the community over at the [Discord](https://discord.gg/V4fJhvtaQn), it's a great place to start learning and contributing!
+And of course, a massive thanks to the organisers of the Vesuvius Challenge for the recognition in the form of a prize, as well as their fantastic competition and invaluable dataset. I'd highly encourage people to join the community over at the [Discord](https://discord.gg/V4fJhvtaQn), it's a great place to start learning and contributing!
