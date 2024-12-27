@@ -70,7 +70,7 @@ class CFG:
     use_amp = True
     scheduler = 'GradualWarmupSchedulerV2'
     # scheduler = 'CosineAnnealingLR'
-    epochs = 10 # 30
+    epochs = 3 # 30
 
     # adamW warmupあり
     warmup_factor = 10
@@ -98,7 +98,7 @@ class CFG:
     seed = 0
 
     # ============== set dataset path =============
-    scrolls_dir = "eval_scrolls"
+    scrolls_dir = "scrolls"
 
     outputs_path = f'./outputs/{comp_name}/{exp_name}/'
 
@@ -247,7 +247,7 @@ def get_train_valid_dataset():
 
     #'20231022170901-stk-w5-mean'
     #BIG 6:'20231005123333','20231022170900','20231012173610','20230702185753','20230929220924','20231007101615'
-    for fragment_id in ['20231210121321-stk-w3-mean', '20230530164535-stk-w5-mean']:  
+    for fragment_id in ['20231210132040-stk-w4-mean']:  
         print(f"{fragment_id}")
         image,mask,fragment_mask = read_image_mask(fragment_id)
         x1_list = list(range(0, image.shape[1]-CFG.tile_size+1, CFG.stride))
@@ -545,7 +545,7 @@ valid_mask_gt = cv2.imread(CFG.comp_dataset_path + f"{CFG.scrolls_dir}/{fragment
 pred_shape=valid_mask_gt.shape
 torch.set_float32_matmul_precision('medium')
 
-fragments=['20231210121321-stk-w3-mean']
+fragments=['20231210132040-stk-w4-mean']
 enc_i,enc,fold=0,'i3d',0
 for fid in fragments:
     print(f"VALIDATION SEGMENT: {fid}\n")
@@ -573,7 +573,7 @@ for fid in fragments:
                                 shuffle=False,
                                 num_workers=CFG.num_workers, pin_memory=True, drop_last=True)
 
-    wandb_logger = WandbLogger(project="vesivus",name=run_slug+f'timesformer_big6_finetune')
+    wandb_logger = WandbLogger(project="vesuvius",name=run_slug+f'timesformer_big6_finetune')
     norm=fold==1
     model=RegressionPLModel(enc='i3d',pred_shape=pred_shape,size=CFG.size,total_steps=len(train_loader))
 
@@ -582,8 +582,8 @@ for fid in fragments:
     multiplicative = lambda epoch: 0.9
 
     trainer = pl.Trainer(
-        # check_val_every_n_epoch=5,
-        max_epochs=150,
+        check_val_every_n_epoch=1,
+        max_epochs=5,
         accelerator="gpu",
         devices=1,
         logger=wandb_logger,

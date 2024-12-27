@@ -34,15 +34,14 @@ class InferenceArgumentParser(Tap):
     segment_path: str = './scrolls'
     model_path: str = './checkpoints/timesformer_wild15_20230702185753_0_fr_i3depoch=12.ckpt'
     out_path: str = "./predictions"
-    stride: int = 2
+    stride: int = 8
     start: int = 32
-    num_layers: int = 1
-    workers: int = 4
-    batch_size: int = 512
+    num_layers: int = 5
+    workers: int = 2
+    batch_size: int = 64
     size: int = 64
     reverse: int = 0
     device: str = 'cuda'
-    format = 'tif'
 
 
 # Parse arguments
@@ -116,15 +115,27 @@ def cfg_init(cfg, mode='val'):
     set_seed(cfg.seed)
 
 
-def read_image_mask(fragment_id,start_idx,end_idx,rotation=0):
+def read_images(fragment_id,start_idx,end_idx,rotation=0):
+    layer_format = 'tif'
+    valid_formats = ['tif', 'jpg', 'png']
+    detected_format = None
+    for ext in valid_formats:
+        test_path = f"{args.segment_path}/{fragment_id}/layers/{start_idx:02}.{ext}"
+        if os.path.exists(test_path):
+            detected_format = ext
+            break
+    if detected_format is None:
+        raise FileNotFoundError("No valid .tif, .jpg, or .png files found.")
+    layer_format = detected_format
+    
     images = []
     idxs = range(start_idx, end_idx)
 
     print()
     for i in idxs:
         print(f"Loading image {(i+1) - start_idx} of {end_idx - start_idx}...")
-        print(f"{args.segment_path}/{fragment_id}/layers/{i:02}.{args.format}")
-        image = cv2.imread(f"{args.segment_path}/{fragment_id}/layers/{i:02}.{args.format}", 0)
+        print(f"{args.segment_path}/{fragment_id}/layers/{i:02}.{layer_format}")
+        image = cv2.imread(f"{args.segment_path}/{fragment_id}/layers/{i:02}.{layer_format}", 0)
         pad0 = (256 - image.shape[0] % 256)
         pad1 = (256 - image.shape[1] % 256)
         image = np.pad(image, [(0, pad0), (0, pad1)], constant_values=0)
@@ -158,7 +169,7 @@ def read_image_mask(fragment_id,start_idx,end_idx,rotation=0):
 def get_img_splits(fragment_id,start_idx,end_idx,rotation=0):
     images = []
     xyxys = []
-    image, fragment_mask = read_image_mask(fragment_id,start_idx,end_idx,rotation)
+    image, fragment_mask = read_images(fragment_id,start_idx,end_idx,rotation)
     x1_list = list(range(0, image.shape[1]-CFG.tile_size+1, CFG.stride))
     y1_list = list(range(0, image.shape[0]-CFG.tile_size+1, CFG.stride))
     for y1 in y1_list:
@@ -364,7 +375,7 @@ if __name__ == "__main__":
     )
 
     for fragment_id in args.segment_id:
-        if glob.glob(f"{args.segment_path}/{fragment_id}/layers/*.tif"):
+        if glob.glob(f"{args.segment_path}/{fragment_id}/layers/*.*"):
             predictions = []
             for r in [0]:
                 for i in [args.start]:
@@ -407,7 +418,7 @@ if __name__ == "__main__":
                 #output_path = os.path.realpath(output_path)
                 #os.startfile
         else:
-            print("ERROR: Could not find a valid layer .tif file to run inference on.")
+            print("ERROR: Could not find a valid layer file to run inference on.")
     del mask_prediction, test_loader, model
     torch.cuda.empty_cache()
     gc.collect()
