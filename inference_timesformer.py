@@ -42,6 +42,7 @@ class InferenceArgumentParser(Tap):
     size: int = 64
     reverse: int = 0
     device: str = 'cuda'
+    tag: str = 'gp'
 
 
 # Parse arguments
@@ -406,10 +407,10 @@ if __name__ == "__main__":
                 print("Saving predictions...")
                 # Generate a timestamp for this inference
                 now = datetime.now()
-                current_time = now.strftime("%Y%m%d%H%M%S")
+                current_time = now.strftime("%H%M%S")
                 cv2.imwrite(os.path.join(
                     f"{args.out_path}/{fragment_id}",
-                    f"{fragment_id}_prediction_n{args.num_layers}s{start_f}e{end_f-1}_{current_time}.png"),
+                    f"{fragment_id}_{tag}_n{args.num_layers}s{start_f}e{end_f-1}_{current_time}.png"),
                     image_cv
                 )
                 print("Done.")
