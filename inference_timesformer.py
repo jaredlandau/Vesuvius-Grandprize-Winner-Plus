@@ -410,7 +410,7 @@ if __name__ == "__main__":
                 current_time = now.strftime("%H%M%S")
                 cv2.imwrite(os.path.join(
                     f"{args.out_path}/{fragment_id}",
-                    f"{fragment_id}_{tag}_n{args.num_layers}s{start_f}e{end_f-1}_{current_time}.png"),
+                    f"{fragment_id}_{args.tag}_n{args.num_layers}s{start_f}e{end_f-1}_{current_time}.png"),
                     image_cv
                 )
                 print("Done.")
