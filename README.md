@@ -141,6 +141,6 @@ This repository is open-source code, licensed under the MIT License. See [LICENS
 
 ## Acknowledgements
 
-Huge thanks to Youssef Nader, Luke Farritor, and Julian Schillinger for their fantastic Grand Prize submission, which this repository is directly built on.
+Huge thanks to Youssef Nader, Luke Farritor, and Julian Schilliger for their fantastic Grand Prize submission, which this repository is directly built on.
 
 And of course, a massive thanks to the organisers of the Vesuvius Challenge for the recognition in the form of a prize, as well as their fantastic competition and invaluable dataset. I'd highly encourage people to join the community over at the [Discord](https://discord.gg/V4fJhvtaQn), it's a great place to start learning and contributing!
